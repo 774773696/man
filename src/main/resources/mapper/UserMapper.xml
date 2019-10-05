@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+dao层接口的全限定名和namespace一样
+dao层接口中的方法名和映射文件中增删改查配置的statement id一致
+方法的参数和配置的输入参数保持一致
+方法的返回值类型和配置中返回类型保持一致
+ -->
+<mapper namespace="com.qfedu.man.dao.UserDao">
+
+   <select id="findByPhone" resultType="com.qfedu.man.entity.User">
+       SELECT * FROM m_user WHERE phone=#{phone}
+   </select>
+
+    <insert id="addUser">
+        INSERT INTO m_user(phone,username,sex,img_url) VALUES(#{phone},#{username},#{sex},#{imgUrl})
+    </insert>
+
+
+    <update id="updatePassword">
+        UPDATE m_user SET PASSWORD = #{password} WHERE phone =#{phone}
+    </update>
+
+
+
+
+
+    <update id="updateUserSex" >
+        UPDATE m_user SET sex = #{sex} WHERE phone =#{phone}
+    </update>
+
+    <update id="updateUserImg">
+        UPDATE m_user SET img_url = #{imgUrl} WHERE phone =#{phone}
+    </update>
+    <update id="updateUserName">
+        UPDATE m_user SET username = #{username} WHERE phone =#{phone}
+    </update>
+
+
+
+
+
+</mapper>
