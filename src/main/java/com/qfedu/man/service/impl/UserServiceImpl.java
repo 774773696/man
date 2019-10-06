@@ -1,6 +1,8 @@
 package com.qfedu.man.service.impl;
 
+import com.qfedu.man.dao.ConsigneeDao;
 import com.qfedu.man.dao.UserDao;
+import com.qfedu.man.entity.Consignee;
 import com.qfedu.man.entity.User;
 import com.qfedu.man.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -18,6 +21,8 @@ public class UserServiceImpl implements UserService {
     @Autowired(required = false) //处理报红的问题
     private UserDao userDao;
 
+    @Autowired(required = false) //处理报红的问题
+    private ConsigneeDao consigneeDao;
     @Override
     public User login(String phone, String password) {
         User user = userDao.findByPhone(phone);
@@ -92,6 +97,33 @@ public class UserServiceImpl implements UserService {
         byPhone.setImgUrl("http://123.57.95.40:8889/webapps/imgs/"+filename);
 
         userDao.updateUserImg(byPhone.getImgUrl(),byPhone.getPhone());
+    }
+
+    @Override
+    public List<Consignee> findAllConsignee(Integer uid) {
+        if(uid != null){
+            return consigneeDao.findByUserId(uid);
+        }
+        throw new RuntimeException("还未登录");
+    }
+
+    @Override
+    public void userAddOrUpdateConsignee(Consignee consignee) {
+        if(consignee.getCid() == null){
+            consigneeDao.addConsignee(consignee);
+        }else if(consignee.getCid() != null){
+            consigneeDao.updateConsignee(consignee);
+        }
+    }
+
+    @Override
+    public void delUserConsignee(Integer cid) {
+        if(cid != null){
+            consigneeDao.delConsignee(cid);
+        }else{
+            throw new RuntimeException("删除失败");
+        }
+
     }
 
 

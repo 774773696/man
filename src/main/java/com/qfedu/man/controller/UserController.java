@@ -2,6 +2,7 @@ package com.qfedu.man.controller;
 
 
 import com.qfedu.man.common.JsonBean;
+import com.qfedu.man.entity.Consignee;
 import com.qfedu.man.entity.User;
 import com.qfedu.man.service.UserService;
 import com.qfedu.man.utils.MD5Utils;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 //@CrossOrigin
@@ -124,5 +126,36 @@ public class UserController {
         return new JsonBean(0,"修改成功");
     }
 
+    @ApiOperation(value="查询用户的所有收货地址", notes="必填参数：用户id")
+    @PostMapping("/findAllConsignee.do")
+    public JsonBean findAllConsignee(Integer uid){
+        List<Consignee> allConsignee = userService.findAllConsignee(uid);
+
+        return new JsonBean(0,allConsignee);
+    }
+
+
+    @ApiOperation(value="添加或修改用户的收货地址", notes="添加收获必填参数：Consignee 收货表（收货人手机、收货人地址，收货人姓名，用户id）" +
+                                                        "修改收获必填参数：Consignee 收货表（收货人手机、收货人地址，收货人姓名，收货id）")
+    @PostMapping("/addOrUpdateConsignee.do")
+    public JsonBean userAddOrUpdateConsignee(Consignee consignee){
+        userService.userAddOrUpdateConsignee(consignee);
+        if(consignee.getCid() == null){
+            return new JsonBean(0,"添加成功");
+        }else  if(consignee.getCid() != null){
+            return new JsonBean(0,"更新成功");
+        }else {
+            return new JsonBean(1,"更新或添加失败");
+        }
+
+
+    }
+
+    @ApiOperation(value="删除用户的收货地址", notes="必填参数：收货id")
+    @PostMapping("/delUserConsignee.do")
+    public JsonBean delUserConsignee(Integer cid){
+        userService.delUserConsignee(cid);
+        return new JsonBean(0,"删除成功");
+    }
 
 }
