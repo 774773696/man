@@ -54,7 +54,6 @@ public class UserController {
     public JsonBean phoneCode(String phone){
         PhoneCode.setNewcode();
         String code = String.valueOf(PhoneCode.getNewcode());
-
         try{
             PhoneCode.sendSms(phone,code);
         }catch(Exception e){

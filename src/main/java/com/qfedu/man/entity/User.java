@@ -18,8 +18,6 @@ public class User { //用户表
     private String qq;//用户qq号码
     @ApiModelProperty(name="wechat", value="用户微信号",dataType = "String")
     private String wechat;//用户微信
-    @ApiModelProperty(name="address", value="用户地址",dataType = "String")
-    private String address;//用户地址
     @ApiModelProperty(name="status", value="用户状态",dataType = "Integer")
     private Integer status;//用户状态
     @ApiModelProperty(name="username", value="用户昵称",dataType = "String")

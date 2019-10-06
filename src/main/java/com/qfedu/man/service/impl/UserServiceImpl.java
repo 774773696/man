@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
     public void updateUserImg(String phone, MultipartFile upload) {
         User byPhone = userDao.findByPhone(phone);
 
-        String path = "C:\\Users\\YU/imgs";
+        String path = "http://123.57.95.40:8889/webapps/imgs";
         File file = new File(path);
         if(!file.exists()){
             file.mkdirs();
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        byPhone.setImgUrl("C:\\Users\\YU\\imgs/"+filename);
+        byPhone.setImgUrl("http://123.57.95.40:8889/webapps/imgs/"+filename);
 
         userDao.updateUserImg(byPhone.getImgUrl(),byPhone.getPhone());
     }
