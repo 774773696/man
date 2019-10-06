@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+        <!--
+        dao层接口的全限定名和namespace一样
+        dao层接口中的方法名和映射文件中增删改查配置的statement id一致
+        方法的参数和配置的输入参数保持一致
+        方法的返回值类型和配置中返回类型保持一致
+         -->
+<mapper namespace="com.qfedu.man.dao.ConsigneeDao">
+    <resultMap id="consigneeMap" type="com.qfedu.man.entity.Consignee">
+        <id property="cid" column="cid"/>
+        <result property="consigneeName" column="consignee_name"/>
+        <result property="consigneePhone" column="consignee_phone"/>
+        <result property="consigneeAddress" column="consignee_address"/>
+        <association property="user" column="uid"
+                     javaType="com.qfedu.man.entity.User"
+                     select="com.qfedu.man.dao.UserDao.findById">
+        </association>
+    </resultMap>
+
+    <select id="findByUserId" resultMap="consigneeMap">
+        select * from m_consignee where uid = #{uid}
+    </select>
+
+    <insert id="addConsignee" parameterType="com.qfedu.man.entity.Consignee">
+        INSERT into m_consignee(consignee_name,consignee_phone,consignee_address,uid)
+        VALUES(#{consigneeName},#{consigneePhone},#{consigneeAddress},#{uid})
+    </insert>
+    
+    <update id="updateConsignee">
+        UPDATE m_consignee set consignee_name=#{consigneeName},consignee_phone=#{consigneePhone},consignee_address=#{consigneeAddress} where cid=#{cid}
+    </update>
+
+    <delete id="delConsignee">
+        DELETE from m_consignee where cid = #{cid}
+    </delete>
+
+
+</mapper>

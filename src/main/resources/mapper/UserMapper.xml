@@ -10,6 +10,10 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
  -->
 <mapper namespace="com.qfedu.man.dao.UserDao">
 
+    <select id="findById" resultType="com.qfedu.man.entity.User">
+       SELECT * FROM m_user WHERE uid=#{uid}
+   </select>
+
    <select id="findByPhone" resultType="com.qfedu.man.entity.User">
        SELECT * FROM m_user WHERE phone=#{phone}
    </select>

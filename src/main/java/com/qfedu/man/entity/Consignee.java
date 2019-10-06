@@ -18,5 +18,7 @@ public class Consignee {
     @ApiModelProperty(name = "uid",value = "用户id",dataType = "Integer")
     private Integer uid;
 
+    private User user;
+
 
 }
