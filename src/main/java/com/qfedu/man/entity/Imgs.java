@@ -14,4 +14,8 @@ public class Imgs {
     private String imgUrl;
 
 
+    @ApiModelProperty(name = "gid",value = "商品id",dataType = "Integer")
+    private Integer gid;
+
+
 }

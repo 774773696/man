@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+dao层接口的全限定名和namespace一样
+dao层接口中的方法名和映射文件中增删改查配置的statement id一致
+方法的参数和配置的输入参数保持一致
+方法的返回值类型和配置中返回类型保持一致
+ -->
+<mapper namespace="com.qfedu.man.dao.GoodsDao">
+
+    <resultMap id="goodsMap" type="com.qfedu.man.entity.Goods">
+        <id property="gid" column="gid" />
+        <result property="goodsName" column="goods_name"></result>
+        <result property="goodsPrice" column="goods_price"></result>
+        <result property="goodsDesc" column="goods_desc"></result>
+        <result property="goodsStore" column="goods_store"></result>
+        <result property="goodstypeId" column="goodstype_id"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="sizeId" column="size_id"></result>
+        <result property="goodsColor" column="goods_color"></result>
+        <result property="goodsOut" column="goods_out"></result>
+        <collection property="imgs" column="gid" ofType="com.qfedu.man.entity.Imgs"
+        select="com.qfedu.man.dao.ImgsDao.findByGoodsId">
+        </collection>
+    </resultMap>
+
+    <select id="findByGoodsTypeId" resultMap="goodsMap">
+        select * from m_goods where goodstype_id = #{goodstypeId}
+    </select>
+
+
+
+</mapper>
