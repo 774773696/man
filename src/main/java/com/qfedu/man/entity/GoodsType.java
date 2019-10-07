@@ -16,4 +16,10 @@ public class GoodsType {
 
     @ApiModelProperty(name = "bid",value = "品牌id",dataType = "Integer")
     private Integer bid;
+
+    @ApiModelProperty(name = "tid",value = "类型id",dataType = "Integer")
+    private Integer tid;
+
+    @ApiModelProperty(name = "imgUrl",value = "商品类型的图片路径",dataType = "String")
+    private String imgUrl;
 }
