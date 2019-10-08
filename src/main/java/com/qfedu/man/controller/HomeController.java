@@ -20,7 +20,6 @@ import java.util.List;
  */
 @RestController
 @Api(description = "首页管理API")
-@RequestMapping("/home")
 public class HomeController {
 
     @Autowired
