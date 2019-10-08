@@ -22,7 +22,7 @@ import java.util.List;
  * @date 2019/10/2 9:06
  */
 @RestController
-@Api(description = "首页管理API")
+@Api(description = "首页展示API")
 public class HomeController {
 
     @Autowired
