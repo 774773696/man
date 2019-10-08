@@ -33,14 +33,14 @@ public class HomeController {
         return new JsonBean(0,allStylist);
     }
 
-    @ApiModelProperty(value = "根据id查询设计师")
+    @ApiOperation(value = "根据id查询设计师")
     @PostMapping("/findStylist.do")
     public JsonBean<Stylist> findStylistById(Integer sid) {
         Stylist stylist = homeService.findStylistById(sid);
         return new JsonBean(0, stylist);
     }
 
-    @ApiModelProperty(value = "查询推荐专题")
+    @ApiOperation(value = "查询推荐专题")
     @PostMapping("/findRecommendSubject.do")
     public JsonBean<HomeRecommendSubject> getRecommendSubject(@RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize,
                                                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
