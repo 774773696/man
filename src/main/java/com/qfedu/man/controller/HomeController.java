@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * @version v1.0
  * @date 2019/10/2 9:06
  */
-@Controller
+@RestController
 @Api(description = "首页管理API")
 @RequestMapping("/home")
 public class HomeController {
@@ -26,7 +27,7 @@ public class HomeController {
     HomeService homeService;
 
     @ApiOperation(value="查询所有设计师")
-    @PostMapping("/findAllType.do")
+    @PostMapping("/findAllStylist.do")
     public JsonBean<Stylist> findAllStylist(){
         List<Stylist> allStylist = homeService.getStylistList();
         return new JsonBean(0,allStylist);
