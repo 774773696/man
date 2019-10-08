@@ -1,5 +1,6 @@
 package com.qfedu.man.service;
 
+import com.qfedu.man.entity.HomeRecommendSubject;
 import com.qfedu.man.entity.Stylist;
 
 import java.util.List;
@@ -15,4 +16,19 @@ public interface HomeService {
      * @return
      */
   public List<Stylist> getStylistList();
+
+    /**
+     * 根据id查询设计师
+     * @param sid
+     * @return
+     */
+    public Stylist findStylistById(Integer sid);
+
+    /**
+     * 获取推荐专题
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    List<HomeRecommendSubject> getSubjectList(Integer pageSize, Integer pageNum);
 }
