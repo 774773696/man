@@ -35,6 +35,8 @@ public class Goods { //商品表
     @ApiModelProperty(name="imgs", value="商品图片",dataType = "Imgs")
     private List<Imgs> imgs;//商品图片
 
+    private String seckillImgUrl;
+
 
 
 

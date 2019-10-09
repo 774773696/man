@@ -21,7 +21,7 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
         <result property="goodsColor" column="goods_color"></result>
         <result property="goodsOut" column="goods_out"></result>
         <collection property="imgs" column="gid" ofType="com.qfedu.man.entity.Imgs"
-        select="com.qfedu.man.dao.ImgsDao.findByGoodsId">
+                    select="com.qfedu.man.dao.ImgsDao.findByGoodsId">
         </collection>
     </resultMap>
 

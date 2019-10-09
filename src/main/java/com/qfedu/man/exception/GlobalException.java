@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalException {
     @ExceptionHandler(Exception.class)
     public JsonBean exception(Exception e){
+        e.printStackTrace();
         return new JsonBean(1,e.getMessage());
     }
 }

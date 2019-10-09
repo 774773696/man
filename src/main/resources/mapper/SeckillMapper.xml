@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qfedu.man.dao.SeckillDao">
+    <resultMap id="goodsSeckllMap" type="com.qfedu.man.entity.Goods">
+        <id property="gid" column="gid" />
+        <result property="goodsName" column="goods_name"></result>
+        <result property="goodsPrice" column="goods_price"></result>
+        <result property="goodsDesc" column="goods_desc"></result>
+        <result property="goodsStore" column="goods_store"></result>
+        <result property="goodstypeId" column="goodstype_id"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="sizeId" column="size_id"></result>
+        <result property="goodsColor" column="goods_color"></result>
+        <result property="goodsOut" column="goods_out"></result>
+        <collection property="imgs" column="gid" ofType="com.qfedu.man.entity.Imgs"
+                    select="com.qfedu.man.dao.ImgsDao.findByGoodsId">
+        </collection>
+    </resultMap>
+
+    <resultMap id="seckllMap" type="seckillGoods">
+        <id column="seckill_id" property="seckillId"></id>
+        <result column="seckill_price" property="seckillPrice"></result>
+        <result column="begin_time" property="beginTime"></result>
+        <result column="end_time" property="endTime"></result>
+        <result column="seckill_stock" property="seckillStock"></result>
+        <result column="seckill_url" property="seckillUrl"></result>
+        <result column="version" property="version"></result>
+        <association property="goods" resultMap="goodsSeckllMap">
+        </association>
+    </resultMap>
+
+    <select id="findAll" resultMap="seckllMap">
+        select s.seckill_id,s.seckill_price,s.begin_time,s.end_time,s.seckill_stock,s.seckill_url,g.* from m_seckill s
+        INNER JOIN m_goods g
+        on s.gid=g.gid
+    </select>
+
+    <select id="findById" parameterType="int" resultMap="seckllMap">
+        select s.seckill_id,s.seckill_price,s.begin_time,s.end_time,s.seckill_stock,s.seckill_url,s.version,g.* from m_seckill s
+        INNER JOIN m_goods g
+        on s.gid=g.gid
+        where s.seckill_id=#{sid}
+    </select>
+    
+    <update id="updateStockById" parameterType="int">
+        update m_seckill set seckill_stock=seckill_stock-1 where seckill_id=#{sid}
+    </update>
+
+    <select id="getStock" parameterType="int" resultType="int">
+        select seckill_stock from m_seckill where seckill_id=#{sid}
+    </select>
+
+    <update id="updateUrlById">
+        update m_seckill set seckill_url = #{url} where seckill_id = #{sid}
+    </update>
+
+
+</mapper>

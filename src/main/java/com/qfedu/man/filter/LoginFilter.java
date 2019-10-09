@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class LoginFilter implements Filter {
                     return;
                 }else{
                     //跳转到登录页面
-                    response.sendRedirect(request.getContextPath() + "/login.html");
+                    response.sendRedirect(request.getContextPath() + "/templates/login.html");
                 }
             }else{
                 String name = stringRedisTemplate.opsForValue().get(token);
@@ -73,7 +72,7 @@ public class LoginFilter implements Filter {
                         return;
                     }else{
                         //跳转到登录页面
-                        response.sendRedirect(request.getContextPath() + "/login.html");
+                        response.sendRedirect(request.getContextPath() + "/templates/login.html");
                     }
 
                 }else{
@@ -90,7 +89,7 @@ public class LoginFilter implements Filter {
                             return;
                         }else{
                             //跳转到登录页面
-                            response.sendRedirect(request.getContextPath() + "/login.html");
+                            response.sendRedirect(request.getContextPath() + "/templates/login.html");
                         }
 
                     }

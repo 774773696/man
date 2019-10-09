@@ -30,8 +30,10 @@ public class UserController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+
+
     @ApiOperation(value="用户登录接口", notes="手机号,密码登录,登录成功会生成token发送给前台保存")
-    @PostMapping("/login")
+    @PostMapping("/login.do")
     public JsonBean login(@RequestParam("phone") String phone, @RequestParam("password") String password){
 
         User user = userService.login(phone, password);
@@ -45,7 +47,6 @@ public class UserController {
         stringRedisTemplate.opsForValue().set(token,phone);
         //过期时间为30分钟
         stringRedisTemplate.expire(token,30, TimeUnit.MINUTES);
-
 
         return new JsonBean(0,token);
     }
